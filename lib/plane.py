@@ -7,3 +7,6 @@ class Plane(object):
 
     def take_off(self):
         self.at_airport = False
+
+    def is_at_airport(self):
+        return self.at_airport

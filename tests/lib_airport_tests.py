@@ -35,8 +35,13 @@ class TestAirport(unittest.TestCase):
         number_of_planes = self.airport.planes
         self.assertEqual(0, len(number_of_planes))
 
-    def test_1c_instruct_to_land(self):
+    def test_2b_instruct_take_off(self):
         """aiport instruct_take_off calls take_off on plane"""
         self.airport.instruct_to_land(self.plane)
         self.airport.instruct_take_off(self.plane)
         self.plane.take_off.assert_called_with()
+
+    def test_2c_instruct_take_off(self):
+        """plane cannot take off if not at airport"""
+        with self.assertRaisesRegexp(Exception, 'Plane not at airport: land plane first'):
+            self.airport.instruct_take_off(self.plane)

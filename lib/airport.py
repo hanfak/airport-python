@@ -6,6 +6,8 @@ class Airport(object):
         plane.land()
         self.planes.append(plane)
 
-    def instruct_take_off(self,plane):
+    def instruct_take_off(self, plane):
+        if plane not in self.planes:
+            raise Exception("Plane not at airport: land plane first")
         plane.take_off()
         self.planes.remove(plane)
