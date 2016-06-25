@@ -7,4 +7,5 @@ class Airport(object):
         self.planes.append(plane)
 
     def instruct_take_off(self,plane):
+        plane.take_off()
         self.planes.remove(plane)
