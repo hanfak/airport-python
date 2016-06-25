@@ -27,3 +27,10 @@ class TestAirport(unittest.TestCase):
         """aiport instruct_to_land calls land on """
         self.airport.instruct_to_land(self.plane)
         self.plane.land.assert_called_with()
+
+    def test_2a_instruct_take_off(self):
+        """plane is not in airport after take off"""
+        self.airport.instruct_to_land(self.plane)
+        self.airport.instruct_take_off(self.plane)
+        number_of_planes = self.airport.planes
+        self.assertEqual(0, len(number_of_planes))
