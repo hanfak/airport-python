@@ -24,3 +24,12 @@ class TestUserStory(unittest.TestCase):
         self.airport.instruct_take_off(self.plane)
         self.assertNotIn(self.plane, self.airport.planes)
         self.assertFalse(self.plane.is_at_airport())
+
+    # def test_user_story_3(self):
+    #
+    #     # As an air traffic controller
+    #     # To ensure safety
+    #     # I want to prevent landing when the airport is full
+    #     self.airport.instruct_to_land(self.plane)
+    #     with self.assertRaisesRegexp(Exception, 'Airport is Full: Take off a plane'):
+    #         self.airport.instruct_to_land(self.plane)

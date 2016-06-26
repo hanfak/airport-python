@@ -3,6 +3,8 @@ class Airport(object):
         self.planes = []
 
     def instruct_to_land(self, plane):
+        if plane in self.planes:
+            raise Exception('Plane already at airport')
         plane.land()
         self.planes.append(plane)
 

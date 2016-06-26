@@ -28,6 +28,12 @@ class TestAirport(unittest.TestCase):
         self.airport.instruct_to_land(self.plane)
         self.plane.land.assert_called_with()
 
+    def test_1d_instruct_to_land(self):
+        """plane cannot land if already in airport"""
+        self.airport.instruct_to_land(self.plane)
+        with self.assertRaisesRegexp(Exception, 'Plane already at airport'):
+            self.airport.instruct_to_land(self.plane)
+
     def test_2a_instruct_take_off(self):
         """plane is not in airport after take off"""
         self.airport.instruct_to_land(self.plane)
