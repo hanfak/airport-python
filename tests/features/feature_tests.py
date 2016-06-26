@@ -35,4 +35,14 @@ class TestUserStory(unittest.TestCase):
         with self.assertRaisesRegexp(Exception, 'Airport is full: Take off plane'):
             self.airport.instruct_to_land(self.plane)
 
-    
+    def test_user_story_4(self):
+        # As the system designer
+        # So that the software can be used for many different airports
+        # I would like a default airport capacity that can be overridden as appropriate
+        self.airport = Airport(5)
+        for number in range(1,6):
+            self.diff_plane = Plane()
+            self.airport.instruct_to_land(self.diff_plane)
+        print self.airport.planes
+        with self.assertRaisesRegexp(Exception, 'Airport is full: Take off plane'):
+            self.airport.instruct_to_land(self.plane)

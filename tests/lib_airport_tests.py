@@ -13,8 +13,13 @@ class TestAirport(unittest.TestCase):
         self.assertEqual(self.airport.planes, [])
 
     def test_0a_defaults(self):
-        """airport has defualt capacity"""
-        self.assertEqual(self.airport.capacity, self.airport._DEFAULT_CAPACITY)
+        """airport has default capacity"""
+        self.assertEqual(self.airport.capacity, 20)
+
+    def test_0b_defaults(self):
+        """airport can change capacity"""
+        self.airport = Airport(5)
+        self.assertEqual(self.airport.capacity, 5)
 
     def test_1a_instruct_to_land(self):
         """plane in airport after landing"""
@@ -45,7 +50,6 @@ class TestAirport(unittest.TestCase):
             self.airport.instruct_to_land(self.diff_plane)
         with self.assertRaisesRegexp(Exception, 'Airport is full: Take off plane'):
             self.airport.instruct_to_land(self.plane)
-
 
     def test_2a_instruct_take_off(self):
         """plane is not in airport after take off"""
