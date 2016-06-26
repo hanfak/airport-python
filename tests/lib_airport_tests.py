@@ -34,6 +34,15 @@ class TestAirport(unittest.TestCase):
         with self.assertRaisesRegexp(Exception, 'Plane already at airport'):
             self.airport.instruct_to_land(self.plane)
 
+    def test_1e_instruct_to_land(self):
+        """plane cannot land if airport is full"""
+        for number in range(1,21):
+            self.diff_plane = Mock()
+            self.airport.instruct_to_land(self.diff_plane)
+        with self.assertRaisesRegexp(Exception, 'Airport is full: Take off plane'):
+            self.airport.instruct_to_land(self.plane)
+
+
     def test_2a_instruct_take_off(self):
         """plane is not in airport after take off"""
         self.airport.instruct_to_land(self.plane)
