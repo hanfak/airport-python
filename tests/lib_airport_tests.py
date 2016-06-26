@@ -12,6 +12,10 @@ class TestAirport(unittest.TestCase):
         """airport is empty"""
         self.assertEqual(self.airport.planes, [])
 
+    def test_0a_defaults(self):
+        """airport has defualt capacity"""
+        self.assertEqual(self.airport.capacity, self.airport._DEFAULT_CAPACITY)
+
     def test_1a_instruct_to_land(self):
         """plane in airport after landing"""
         self.airport.instruct_to_land(self.plane)

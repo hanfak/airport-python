@@ -1,7 +1,8 @@
 class Airport(object):
     def __init__(self):
         self.planes = []
-        self.capacity = 20
+        self._DEFAULT_CAPACITY = 20 
+        self.capacity = self._DEFAULT_CAPACITY
 
     def instruct_to_land(self, plane):
         self.__is_airport_full()

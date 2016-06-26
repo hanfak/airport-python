@@ -32,6 +32,7 @@ class TestUserStory(unittest.TestCase):
         for number in range(1,21):
             self.diff_plane = Plane()
             self.airport.instruct_to_land(self.diff_plane)
-        print self.airport.planes
         with self.assertRaisesRegexp(Exception, 'Airport is full: Take off plane'):
             self.airport.instruct_to_land(self.plane)
+
+    
