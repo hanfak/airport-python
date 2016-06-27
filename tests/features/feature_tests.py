@@ -1,5 +1,5 @@
 import unittest
-from mock import Mock
+# from mock import Mock
 from mock import MagicMock
 from lib.airport import Airport
 from lib.plane import Plane
@@ -45,17 +45,25 @@ class TestUserStory(unittest.TestCase):
         self.airport = Airport(5)
         for number in range(1,6):
             self.diff_plane = Plane()
+            self.airport.is_stormy = MagicMock(return_value=False)
             self.airport.instruct_to_land(self.diff_plane)
         print self.airport.planes
         with self.assertRaisesRegexp(Exception, 'Airport is full: Take off plane'):
             self.airport.instruct_to_land(self.plane)
 
     def test_user_story_5(self):
-        pass
         # As an air traffic controller
         # To ensure safety
         # I want to prevent takeoff when weather is stormy
-        self.airport.is_stormy = MagicMock(return_value=True)
         self.airport.instruct_to_land(self.plane)
+        self.airport.is_stormy = MagicMock(return_value=True)
         with self.assertRaisesRegexp(Exception, 'Plane cannot take off: weather is stormy'):
             self.airport.instruct_take_off(self.plane)
+
+    def test_user_story_6(self):
+        # As an air traffic controller
+        # To ensure safety
+        # I want to prevent landing when weather is stormy
+        self.airport.is_stormy = MagicMock(return_value=True)
+        with self.assertRaisesRegexp(Exception, 'Plane cannot land: weather is stormy'):
+            self.airport.instruct_to_land(self.plane)

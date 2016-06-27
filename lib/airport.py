@@ -7,6 +7,8 @@ class Airport(object):
         self.capacity = capacity
 
     def instruct_to_land(self, plane):
+        if self.is_stormy():
+            raise Exception('Plane cannot land: weather is stormy')
         self.__is_airport_full()
         self.__is_plane_at_airport(plane)
         plane.land()

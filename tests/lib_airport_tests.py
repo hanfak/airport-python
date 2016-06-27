@@ -53,6 +53,11 @@ class TestAirport(unittest.TestCase):
         with self.assertRaisesRegexp(Exception, 'Airport is full: Take off plane'):
             self.airport.instruct_to_land(self.plane)
 
+    def test_1f_instruct_to_land(self):
+        """plane cannot land if stormy weather"""
+        self.airport.is_stormy = MagicMock(return_value=True)
+        with self.assertRaisesRegexp(Exception, 'Plane cannot land: weather is stormy'):
+            self.airport.instruct_to_land(self.plane)
 
     def test_2a_instruct_take_off(self):
         """plane is not in airport after take off"""
@@ -74,7 +79,7 @@ class TestAirport(unittest.TestCase):
 
     def test_2d_instruct_take_off(self):
         """plane cannot take off if stormy weather"""
-        self.airport.is_stormy = MagicMock(return_value=True)
         self.airport.instruct_to_land(self.plane)
+        self.airport.is_stormy = MagicMock(return_value=True)
         with self.assertRaisesRegexp(Exception, 'Plane cannot take off: weather is stormy'):
             self.airport.instruct_take_off(self.plane)
