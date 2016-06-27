@@ -1,5 +1,6 @@
 import unittest
 from mock import Mock
+from mock import MagicMock
 from lib.airport import Airport
 
 class TestAirport(unittest.TestCase):
@@ -7,6 +8,7 @@ class TestAirport(unittest.TestCase):
     def setUp(self):
         self.airport = Airport()
         self.plane = Mock()
+        self.airport.is_stormy = MagicMock(return_value=False)
 
     def test_0_defaults(self):
         """airport is empty"""
@@ -51,6 +53,7 @@ class TestAirport(unittest.TestCase):
         with self.assertRaisesRegexp(Exception, 'Airport is full: Take off plane'):
             self.airport.instruct_to_land(self.plane)
 
+
     def test_2a_instruct_take_off(self):
         """plane is not in airport after take off"""
         self.airport.instruct_to_land(self.plane)
@@ -67,4 +70,11 @@ class TestAirport(unittest.TestCase):
     def test_2c_instruct_take_off(self):
         """plane cannot take off if not at airport"""
         with self.assertRaisesRegexp(Exception, 'Plane not at airport: land plane first'):
+            self.airport.instruct_take_off(self.plane)
+
+    def test_2d_instruct_take_off(self):
+        """plane cannot take off if stormy weather"""
+        self.airport.is_stormy = MagicMock(return_value=True)
+        self.airport.instruct_to_land(self.plane)
+        with self.assertRaisesRegexp(Exception, 'Plane cannot take off: weather is stormy'):
             self.airport.instruct_take_off(self.plane)
