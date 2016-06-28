@@ -1,5 +1,5 @@
 import unittest
-from mock import MagicMock
+import random
 from lib.weather import Weather
 
 class WeatherTestCase(unittest.TestCase):
@@ -9,10 +9,10 @@ class WeatherTestCase(unittest.TestCase):
 
     def test_1a_is_stormy(self):
         """weather is stormy"""
-        self.weather.chances = MagicMock(return_value=8)
+        random.seed( 2 )
         self.assertTrue(self.weather.is_stormy())
 
     def test_1b_is_stormy(self):
         """weather is not stormy"""
-        self.weather.chances = MagicMock(return_value=3)
+        random.seed( 9 )
         self.assertFalse(self.weather.is_stormy())
